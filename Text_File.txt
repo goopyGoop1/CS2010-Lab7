@@ -1,0 +1,39 @@
+Listing 5.8   MultiTexture.js      
+ TexturedQuad.js      ...  13 var FSHADER_SOURCE =       
+...   17   'uniform sampler2D u_Sampler0;\n' +   
+18   'uniform sampler2D u_Sampler1;\n' +    
+19   'varying vec2 v_TexCoord;\n' +   
+20   'void main() {\n' +   21   ' 
+vec4 color0 = texture2D(u_Sampler0, v_TexCoord);\n' +               
+<-(1)    22   '  vec4 color1 = texture2D(u_Sampler1, v_TexCoord);\n' +     
+23   '  gl_FragColor = color0 * color1;\n' +
+<-(2)    24   '}\n';   25   26 function main() {      ...   
+53    Set textures   54   
+if (!initTextures(gl, n)) {      ...   58 }   
+59   
+60 function initVertexBuffers(gl) {   
+    61   var verticesTexCoords = new Float32Array([   
+    62      Vertex coordinates and texture coordinates   
+    
+63     -0.5,  -0.5,   0.0, 1.0,
+64     -0.5, -0.5,    0.0, 0.0,
+65      0.5,  -0.5,   1.0, 1.0,   
+66      0.5, -0.5,   1.0, 0.0,
+67   ]);
+68   var n = 4;  The number of vertices      ...
+100   return n;
+101 }  102
+103 function initTextures(gl, n) {
+    104    Create a texture object
+    105   var texture0 = gl.createTexture();                                       <-(3)
+    106   var texture1 = gl.createTexture();       ...
+    112  
+    
+    
+    Get the storage locations of u_Sampler1 and u_Sampler2
+    113   var u_Sampler0 = gl.getUniformLocation(gl.program, 'u_Sampler0');
+    
+    114   var u_Sampler1 = gl.getUniformLocation(gl.program, 'u_Sampler1');
+    ...  120   
+    
+    Create Image objects
